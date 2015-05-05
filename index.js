@@ -36,6 +36,18 @@ var Router = React.createClass({
     _onBackData = data;
   },
 
+  addOnBackListener: function(callback) {
+    BackButtonStore.addOnBackListener(callback);
+  },
+
+  removeOnBackListener: function(callback) {
+    BackButtonStore.removeOnBackListener(callback)
+  },
+
+  getDataOnBack: function() {
+    return BackButtonStore.getDataOnBack();
+  },
+
   onBack: function(navigator) {
     if (this.state.route.index > 0) {
       BackButtonAction.onBack(_onBackData);
@@ -68,15 +80,15 @@ var Router = React.createClass({
     }.bind(this);
 
     var addOnBackListener = function(callback) {
-      BackButtonStore.addOnBackListener(callback);
+      this.addOnBackListener(callback);
     };
 
     var removeOnBackListener = function(callback) {
-      BackButtonStore.removeOnBackListener(callback)
+      this.removeOnBackListener(callback);
     };
 
     var getDataOnBack = function() {
-      return BackButtonStore.getDataOnBack();
+      return this.getDataOnBack();
     };
 
     var didStartDrag = function(evt) {
@@ -144,9 +156,9 @@ var Router = React.createClass({
             rightCorner={this.props.rightCorner}
             titleStyle={this.props.titleStyle}
             toRoute={this.onForward}
-            getDataOnBack={getDataOnBack}
-            addOnBackListener={addOnBackListener}
-            removeOnBackListener={removeOnBackListener}
+            getDataOnBack={this.getDataOnBack}
+            addOnBackListener={this.addOnBackListener}
+            removeOnBackListener={this.removeOnBackListener}
             toBack={this.onBack}
             customAction={this.customAction}
           />
