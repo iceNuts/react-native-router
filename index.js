@@ -81,15 +81,19 @@ var Router = React.createClass({
 
     var addOnBackListener = function(callback) {
       this.addOnBackListener(callback);
-    };
+    }.bind(this);
 
     var removeOnBackListener = function(callback) {
       this.removeOnBackListener(callback);
-    };
+    }.bind(this);
 
     var getDataOnBack = function() {
       return this.getDataOnBack();
-    };
+    }.bind(this);
+
+    var setOnBackData = function(data) {
+      this.setOnBackData(data);
+    }.bind(this);
 
     var didStartDrag = function(evt) {
       var x = evt.nativeEvent.pageX;
@@ -133,6 +137,7 @@ var Router = React.createClass({
           getDataOnBack={getDataOnBack}
           addOnBackListener={addOnBackListener}
           removeOnBackListener={removeOnBackListener}
+          setOnBackData={setOnBackData}
           customAction={customAction}
         />
       </View>
@@ -159,6 +164,7 @@ var Router = React.createClass({
             getDataOnBack={this.getDataOnBack}
             addOnBackListener={this.addOnBackListener}
             removeOnBackListener={this.removeOnBackListener}
+            setOnBackData={this.setOnBackData}
             toBack={this.onBack}
             customAction={this.customAction}
           />
