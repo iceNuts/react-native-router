@@ -21,7 +21,8 @@ var Router = React.createClass({
     return {
       route: {
         name: null,
-        index: null
+        index: null,
+        tag: null
       },
       dragStartX: null,
       didSwitchView: null,
@@ -92,7 +93,10 @@ var Router = React.createClass({
     }.bind(this);
 
     var setOnBackData = function(data) {
-      this.setOnBackData(data);
+      this.setOnBackData({
+          data: data,
+          source: route.tag
+        });
     }.bind(this);
 
     var didStartDrag = function(evt) {
@@ -132,6 +136,7 @@ var Router = React.createClass({
           name={route.name}
           index={route.index}
           data={route.data}
+          tag={route.tag}
           toRoute={goForward}
           toBack={goBackwards}
           getDataOnBack={getDataOnBack}
